@@ -37,7 +37,7 @@
   },
   "scripts": {
     "build-zmq": "cd node_modules/zmq && node-gyp rebuild --target=0.28.3 --arch=x64 --dist-url=https://atom.io/download/atom-shell",
-    "build": "npm install && npm run build-zmq",
+    "build": "npm install && npm run build-zmq && bower install",
     "start": "electron .",
     "build-docker": "docker build -t rgbkrk/sidecar .",
     "build-osx": "electron-packager ./ SideCar --platform=darwin --arch=x64 --version=0.28.3",
