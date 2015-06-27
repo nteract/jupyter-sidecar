@@ -1,54 +1,82 @@
 <!-- Header component -->
+
+<head>
+  <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.min.css">
+</head>
+<body>
 <template id="tmpl-header">
   <style>
     .core-header {
+
       height: 40px;
       line-height: 60px;
       font-size: 18px;
-      padding-bottom: 5px;
       background-color: #FFFFFF;
       color: #FFF;
-      transition: height 0.2s;
-      display: block;
-      position: relative;
-      z-index: 100;
       padding-left: 10px;
       padding-right: 10px;
 
-      box-sizing: border-box;
+      -webkit-app-region: drag;
+      -webkit-user-select: none;
     }
 
     .core-header #app-logo {
       height: 28px;
     }
 
-    .header-bar {
+    .underbar {
       width: 100%;
       height: 1px;
       background: #e7e7e7;
       margin-bottom: -1px;
     }
 
+    .header-left {
+      float: left !important;
+    }
+
+    .header-right {
+      float: right !important;
+    }
+
   </style>
   <div class="core-header">
-    <img id="app-logo" src="assets/jupyter.png" height="32px" />
+    <div class="header-left">
+      <img id="app-logo" src="assets/jupyter.png" height="32px" />
+    </div>
+    <div class="header-right">
+      <i id="status" class="fa fa-camera-retro header-right"></i>status
+    </div>
   </div>
-  <div class="header-bar"></div>
+  <div class="underbar"></div>
 </template>
 
 <script>
 (function () {
   var importDoc = document.currentScript.ownerDocument;
 
-  var prototype = Object.create(HTMLElement.prototype);
+  var proto = Object.create(HTMLElement.prototype);
 
-  prototype.createdCallback = function() {
+  proto.createdCallback = function() {
     var t = importDoc.querySelector('#tmpl-header');
     var clone = document.importNode(t.content, true);
     this.root = this.createShadowRoot();
     this.root.appendChild(clone);
   };
 
-  document.registerElement('sidecar-header', {prototype: prototype});
+  proto.attributeChangedCallback = function(key, oldValue, newValue) {
+    status = this.root.querySelector('.status');
+
+    if (newValue === "busy") {
+      status.className = "fa fa-spinner fa-pulse";
+    } else if (newValue === "idle") {
+      status.classname = "fa ";
+    } else {
+      console.log("Unknown");
+    }
+  }
+
+  document.registerElement('sidecar-header', {prototype: proto});
 })();
 </script>
+</body>

@@ -1,0 +1,23 @@
+{
+  "name": "jupyter-sidecar",
+  "version": "0.0.2",
+  "homepage": "https://github.com/rgbkrk/jupyter-sidecar",
+  "authors": [
+    "Kyle Kelley <rgbkrk@gmail.com>"
+  ],
+  "description": "Side HTML Display of Jupyter rich output",
+  "keywords": [
+    "jupyter"
+  ],
+  "license": "BSD",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "font-awesome": "~4.3.0"
+  }
+}
