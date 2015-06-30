@@ -37,7 +37,7 @@ function launchSideCar(session) {
   sideCar.loadUrl('file://' + __dirname + '/index.html');
 
   sideCar.webContents.on('did-finish-load', function () {
-    session.on(function (message) {
+    session.iopubSocket.on("message", function (message) {
       sideCar.webContents.send("message", message);
     });
   });
