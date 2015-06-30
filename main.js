@@ -65,7 +65,7 @@ function updateKernel(connFiles) {
       // This connection file is still present. Create a connection and probe its heartbeat to
       // verify that the kernel is still responsive.
       let config = require(connPath);
-      let session = new jupyter.IOPubSession(config);
+      let session = new jupyter.Session(config);
 
       session.checkHealth(makeHeartbeatHandler(connPath, session));
     } else {
@@ -85,7 +85,7 @@ function updateKernel(connFiles) {
  * response from the session's heartbeat.
  *
  * @param connPath {string} the filesystem path to the connection JSON file.
- * @param session {jupyter.IOPubSession} an opened session to this kernel.
+ * @param session {jupyter.Session} an opened session to this kernel.
  */
 function makeHeartbeatHandler(connPath, session) {
   return function (alive) {
@@ -103,7 +103,7 @@ function makeHeartbeatHandler(connPath, session) {
  * new sidecar window if it does exist already.
  *
  * @param connPath {string} the filesystem path to the connection JSON file.
- * @param session {jupyter.IOPubSession} an opened session to this kernel.
+ * @param session {jupyter.Session} an opened session to this kernel.
  */
 function handleLiveKernel(connPath, session) {
   if (! liveSidecars.has(connPath)) {
