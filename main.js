@@ -40,9 +40,6 @@ function launchSideCar(session) {
     session.iopubSocket.on("message", function (message) {
       sideCar.webContents.send("message", message);
     });
-    session.shellSocket.on("message", function(message){
-      console.log(message);
-    });
   });
 
   // Emitted when the window is closed.
