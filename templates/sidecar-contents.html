@@ -36,15 +36,13 @@
 
     var container = this.root.getElementById('container');
 
-    function appendResult(html, kind, label) {
+    function appendResult(html, kind) {
       var node = document.createElement('sidecar-result');
-      node.setPayload(html);
-      if (label) {
-        node.setLabel(label);
-      }
       if (kind) {
         node.setKind(kind);
       }
+      node.setPayload(html);
+
       container.appendChild(node);
 
       node.scrollIntoView();
@@ -52,7 +50,7 @@
 
     ipc.on('message', function (message) {
       display.handleMessage(message, {
-        result: function (html, kind, label) { appendResult(html, kind, label); },
+        result: function (html, kind) { appendResult(html, kind); },
         trace: function (html) { appendResult(html, 'err'); },
         code: function (js) { eval(js); }
       });

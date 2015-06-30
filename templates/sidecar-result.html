@@ -9,47 +9,34 @@
     }
 
     #state {
-      display: block;
+      display: flex;
       margin-bottom: 5px;
+      background-color: thin #f7f7f7 solid;
     }
 
-    h1 {
-      font-size: 12pt;
-      font-family: Helvetica;
-      font-weight: normal;
-      font-variant: small-caps;
-      padding: 4px 20px;
-      border-top-left-radius: 5px;
-      border-top-right-radius: 5px;
-      cursor: pointer;
+    .ok {
+      border-left: thin #7f7 solid;
     }
 
-    h1 button {
-      float: right;
-      width: 30px;
-      text-align: center;
-      cursor: pointer;
-    }
-
-    .ok h1 {
-      color: #7c7;
-      background-color: #7f7;
-    }
-
-    .err h1 {
-      color: #c00;
-      background-color: #f77;
+    .err {
+      border-left: thin #f77 solid;
     }
 
     #output-container {
       padding: 5px 10px;
-      border-left: solid 2px #eee;
-      border-right: solid 2px #eee;
-      border-bottom: solid 2px #eee;
       margin-bottom: 5px;
       font-family: monospace;
       font-weight: 110%;
     }
+
+    #gutter {
+      width:20px;
+    }
+
+    #output-container {
+      width: 100%;
+    }
+
 
     .collapsed #output-container {
       display: none;
@@ -60,10 +47,7 @@
     }
   </style>
   <div id="state">
-    <h1>
-      <button id="btn-close">X</button>
-      <span id="label"></span>
-    </h1>
+    <div id="gutter"></div>
     <div id="output-container"></div>
   </div>
 </template>
@@ -84,25 +68,15 @@
 
     this.state = this.root.getElementById("state");
     this.outputContainer = this.root.getElementById("output-container");
-    this.header = this.root.getElementsByTagName("h1")[0];
-    this.label = this.root.getElementById("label");
-    this.closeButton = this.root.getElementById("btn-close");
 
-    this.header.onclick = function () {
+    this.state.onclick = function () {
       this.state.classList.toggle("collapsed");
     }.bind(this);
 
-    this.closeButton.onclick = function () {
-      this.remove();
-    }.bind(this);
   };
 
   resultPrototype.setKind = function (kind) {
     this.state.classList.add(kind);
-  }
-
-  resultPrototype.setLabel = function (content) {
-    this.label.innerHTML = content;
   }
 
   resultPrototype.setPayload = function (content) {
