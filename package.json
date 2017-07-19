@@ -27,7 +27,7 @@
     "electron-prebuilt": "1.4.13",
     "jmp": "0.7.5",
     "jupyter-js-output-area": "0.3.3",
-    "jupyter-paths": "^1.1.0",
+    "jupyter-paths": "^2.0.0",
     "node-gyp": "^3.5.0",
     "watch": "^1.0.1",
     "zmq": "^2.12.0"
